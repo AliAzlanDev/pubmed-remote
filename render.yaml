@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: pubmed-mcp-server
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:remote
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MCP_TRANSPORT
+        value: sse
+      - key: PORT
+        value: "8000"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: LOG_LEVEL
+        value: info
+      - key: NCBI_EMAIL
+        value: your-email@example.com
+      - key: MAX_RESULTS
+        value: "100"
+      - key: REQUEST_TIMEOUT
+        value: "30000"
+    healthCheckPath: /health
+    autoDeploy: true
